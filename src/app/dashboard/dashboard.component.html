@@ -1,0 +1,59 @@
+<div class="container-fluid bg-light">
+    <div class="container bg-light">
+        <div class="row mt-4" style="height: 500px;">
+            <div class="col"></div>
+
+            <div class="col-md-6 bg-white shadow">
+
+                <div class="card bg-info mt-4">
+                    <h4 class="text-white ps-3 pt-2 pd-2" style="text-align: center">To Do List</h4>
+                </div>
+
+                <div class="shadow">
+                    <div class="input-group p-4">
+                        <input type="text" class="form-control" placeholder=" Add A Task to your list" name="task"[(ngModel)]="addTaskValue">
+                        <button class="btn btn-outline-success" type="button" (click)="addNewTask()">ADD</button>
+                    </div>
+                </div>
+
+                <h4 class="text-primary mt-4"> List of Tasks : </h4>
+
+                <div style="overflow-y: auto; height:350px">
+                    <div class="m-3" *ngFor="let task of taskArr; let i =index" >
+                        <div class="p-2 shadow border">
+                            <div class="input-group row ps2">
+                                <div class="card col-md-8 border-0"> {{task.task_name}} </div>
+                                <button class="btn btn-outline-primary col me-2" (click)="isWork()" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Sub Task</button>
+                                <div (click)="delete(i)"  class="btn btn-outline-danger col">X</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col">
+                <!-- Modal -->
+                <div *ngIf="modalVisibble" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close"></button>
+                    <div class="modal-body">
+                        <div class="card bg-info mt-4">
+                            <h4 class="text-white ps-3 pt-2 pd-2" style="text-align: center">Sub-List</h4>
+                        </div>
+        
+                        <div class="shadow">
+                            <div class="input-group p-4">
+                                <input type="text" class="form-control" placeholder=" Add A Sub-Task" [(ngModel)]="addsubTaskValue">
+                                <button class="btn btn-outline-success" type="button" (click)="addsub()">ADD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
