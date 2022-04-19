@@ -1,7 +1,7 @@
 <div class="container-fluid bg-light">
     <div class="container bg-light">
         <div class="row mt-4" style="height: 500px;">
-            <div class="col"></div>
+            
 
             <div class="col-md-6 bg-white shadow">
 
@@ -19,41 +19,58 @@
                 <h4 class="text-primary mt-4"> List of Tasks : </h4>
 
                 <div style="overflow-y: auto; height:350px">
-                    <div class="m-3" *ngFor="let task of taskArr; let i =index" >
+                    <div class="m-3" *ngFor="let task of taskArr; let i = index">
                         <div class="p-2 shadow border">
                             <div class="input-group row ps2">
                                 <div class="card col-md-8 border-0"> {{task.task_name}} </div>
-                                <button class="btn btn-outline-primary col me-2" (click)="isWork()" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Sub Task</button>
+                                <button class="btn btn-outline-primary col me-2" (click)="openPopup()" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Sub Task</button>
                                 <div (click)="delete(i)"  class="btn btn-outline-danger col">X</div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                
-            </div>
-            <div class="col">
-                <!-- Modal -->
-                <div *ngIf="modalVisibble" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal" tabindex="-1" role="dialog" style="background-color:rgba(0,0,0,0.4);" [ngStyle]="{'display':displayStyle}" >
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close"></button>
-                    <div class="modal-body">
-                        <div class="card bg-info mt-4">
-                            <h4 class="text-white ps-3 pt-2 pd-2" style="text-align: center">Sub-List</h4>
-                        </div>
-        
-                        <div class="shadow">
-                            <div class="input-group p-4">
-                                <input type="text" class="form-control" placeholder=" Add A Sub-Task" [(ngModel)]="addsubTaskValue">
-                                <button class="btn btn-outline-success" type="button" (click)="addsub()">ADD</button>
+                                <!-- Modal -->
+
+                                <div class="modal-body">
+                                    <div class="card bg-info mt-4">
+                                        <h4 class="text-white ps-3 pt-2 pd-2" style="text-align: center">Sub-List</h4>
+                                    </div>
+    
+                                    <div class="shadow">
+                                        <div class="input-group p-4">
+                                            <input type="text" class="form-control" placeholder="Add A Sub-Task" [(ngModel)]="addsubTaskValue">
+                                            <button class="btn btn-outline-success" type="button" (click)="addSubTask(i)">ADD</button>
+                                        </div>
+    
+                                        <div style="overflow-y: auto; height:350px">
+    
+                                        <div class="m-3" *ngFor="let sub of taskArr[i].subTask; ">
+                                            <div class="p-2 shadow border">
+                                                <div class="input-group row ps2">
+                                                    <div class="card col-md-8 border-0"> {{sub}} </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" (click)="closePopup()"> Close </button>
+                            </div>
                             </div>
                         </div>
-                    </div>
-                </div>  
+                        </div>
+                        </div>
+                    </div>  
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
     
