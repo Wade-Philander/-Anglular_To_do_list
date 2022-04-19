@@ -12,18 +12,23 @@ export class DashboardComponent implements OnInit {
   public addsubTaskValue: string = "";
   public taskArr: Task[] = [];
   public modalVisibble = false;
-  public titleModal = "this should change no?";
+  public subtaskArr: Task[] = [];
+
+
   constructor(){}
 
   ngOnInit(): void {
   }
   addNewTask(){
-    var newTask = new Task(this.addTaskValue,"",1);
+    var newTask = new Task(this.addTaskValue,[],1);
     this.taskArr.push(newTask);
   };
 
-  addSubTask(){
-    
+  addSubTask(index: number){
+    if(this.taskArr[index].subTask == null){
+      this.taskArr[index].subTask = [];
+    }
+    this.taskArr[index].subTask.push(this.addsubTaskValue);
   } 
 
   delete(id:number){
@@ -31,20 +36,22 @@ export class DashboardComponent implements OnInit {
     i !== id);
 
   }
-
-
   closeModal(){
     this.modalVisibble = false;
   }
-
   isWork(){
     
     this.modalVisibble = true;
     console.log("working modal")
-
+  }
+  
+  displayStyle = "none";
+  
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 
-  addsub(){
-    
-  }
 }
